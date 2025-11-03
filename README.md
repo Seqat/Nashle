@@ -232,6 +232,16 @@ npm run preview
 - Ensure you have Node.js 16.0 or higher
 - Use `nvm` (Node Version Manager) to switch versions if needed
 
+## 🎨 Features
+
+- **Dark Cyberpunk Aesthetic**: Immersive terminal-style interface with neon green accents
+- **Real-time AI Feedback**: Watch the AI "think" and process your guesses
+- **Rationality Meter**: Track how many words remain possible
+- **Developer Mode**: Enable solution viewing via environment variable
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
+- **Smooth Animations**: Tile reveals and glowing effects
+- **End Game Modal**: Victory/defeat popup with smooth animations
+
 ## 🛠️ Tech Stack
 
 - **React 19.1.1** - UI framework
@@ -259,6 +269,7 @@ nashle/
 │   └── main.jsx                # React entry point
 ├── public/                     # Static assets
 ├── .env                        # Environment variables (optional)
+├── LICENSE                     # MIT License
 ├── package.json                # Dependencies and scripts
 ├── tailwind.config.js          # Tailwind configuration
 ├── vite.config.js              # Vite configuration
@@ -293,7 +304,21 @@ The cyberpunk theme is defined in `src/index.css`:
 
 ## 📝 License
 
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📧 Contact
+
+For questions, issues, or suggestions, please open an issue on the GitHub repository.
 
 ---
 
