@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nashle Cyberpunk Theme */
+:root {
+  --bg: #050505;
+  --primary: #00FF80;
+  --secondary: #1AFF9C;
+  --text: #C0FFC0;
+  --error: #FF0050;
+  --partial: #B2FF00;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-[color:var(--bg)] text-[color:var(--text)] antialiased;
+  font-family: 'JetBrains Mono', 'Inconsolata', ui-monospace, monospace;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect width="2" height="16" fill="%2300FF80"/></svg>') 0 0, auto;
+}
+
+/* Scanline overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,255,100,0.03),
+    rgba(0,255,100,0.03) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Noise texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.tile {
+  @apply w-14 h-14 md:w-16 md:h-16 grid place-items-center rounded text-xl md:text-2xl font-bold select-none transition-all duration-300;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tile-gray { 
+  @apply bg-[#1A1A1A] text-gray-400 border border-[#333];
+  box-shadow: 0 0 0 1px rgba(0,255,128,0.1);
+}
+
+.tile-yellow { 
+  @apply bg-[#FFD300]/20 text-[#FFD300] border-[#FFD300];
+  box-shadow: 0 0 15px rgba(255,211,0,0.5), inset 0 0 10px rgba(255,211,0,0.15);
+}
+
+.tile-green { 
+  @apply bg-[#00FF80]/20 text-[#00FF80] border-[#00FF80];
+  box-shadow: 0 0 20px rgba(0,255,128,0.6), inset 0 0 15px rgba(0,255,128,0.2);
+}
+
+@keyframes tile-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.tile-reveal {
+  animation: tile-reveal 0.3s ease-out forwards;
+}
+
+.btn-primary {
+  @apply px-6 py-2 rounded border border-[color:var(--primary)] text-[color:var(--primary)] font-bold transition-all duration-200;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 0 10px rgba(0,255,128,0.5);
+  background: transparent;
+}
+
+.btn-primary:hover:not(:disabled) {
+  @apply bg-[color:var(--primary)] text-black;
+  box-shadow: 0 0 20px rgba(0,255,128,0.8), inset 0 0 10px rgba(0,255,128,0.3);
+  animation: flicker 0.1s;
+}
+
+.btn-primary:disabled {
+  @apply opacity-40 cursor-not-allowed;
+  box-shadow: 0 0 5px rgba(0,255,128,0.2);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.glass {
+  @apply bg-black/60 border border-[#00FF80]/30 rounded-lg backdrop-blur-sm;
+  box-shadow: 0 0 15px rgba(0,255,128,0.2), inset 0 0 10px rgba(0,255,128,0.05);
+}
+
+/* Blinking caret animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.blink-caret {
+  animation: blink 1s step-end infinite;
+}
+
+/* Terminal text glow */
+.text-glow {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+}
+
+/* Modal fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
