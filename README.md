@@ -6,32 +6,34 @@
 
 ## 📑 Table of Contents
 
-- [What is Nashle?](#-what-is-nashle)
-- [Game Theory Foundation](#-game-theory-foundation)
-  - [The Nash Equilibrium Connection](#the-nash-equilibrium-connection)
-  - [Adversarial Feedback Strategy](#adversarial-feedback-strategy)
-  - [Why This is Different from Wordle](#why-this-is-different-from-wordle)
-- [How to Play](#-how-to-play)
-  - [Basic Rules](#basic-rules)
-  - [Gameplay Flow](#gameplay-flow)
-  - [Tips for Success](#tips-for-success)
-- [Setup Instructions](#-setup-instructions)
-  - [Prerequisites](#prerequisites)
-    - [Installing Node.js](#installing-nodejs)
-    - [Arch Linux Setup](#arch-linux-setup)
-  - [Installation Steps](#installation-steps)
-  - [Building for Production](#building-for-production)
-  - [Troubleshooting](#troubleshooting)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Customization](#-customization)
-  - [Game Settings](#game-settings)
-  - [Dictionary](#dictionary)
-  - [Styling](#styling)
-- [License](#-license)
-- [Contributing](#-contributing)
-- [Contact](#-contact)
+- [Nashle: Anti-Cooperative Guessing Game](#nashle-anti-cooperative-guessing-game)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [🎮 What is Nashle?](#-what-is-nashle)
+  - [🧠 Game Theory Foundation](#-game-theory-foundation)
+    - [The Nash Equilibrium Connection](#the-nash-equilibrium-connection)
+    - [Adversarial Feedback Strategy](#adversarial-feedback-strategy)
+    - [Why This is Different from Wordle](#why-this-is-different-from-wordle)
+  - [🎯 How to Play](#-how-to-play)
+    - [Basic Rules](#basic-rules)
+    - [Gameplay Flow](#gameplay-flow)
+    - [Tips for Success](#tips-for-success)
+  - [🚀 Setup Instructions](#-setup-instructions)
+    - [Prerequisites](#prerequisites)
+      - [Installing Node.js](#installing-nodejs)
+    - [Installation Steps](#installation-steps)
+    - [Building for Production](#building-for-production)
+    - [Troubleshooting](#troubleshooting)
+  - [🎨 Features](#-features)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [📁 Project Structure](#-project-structure)
+  - [⚙️ Customization](#️-customization)
+    - [Game Settings](#game-settings)
+    - [Dictionary](#dictionary)
+    - [Styling](#styling)
+  - [Docker](#docker)
+  - [📝 License](#-license)
+  - [🤝 Contributing](#-contributing)
+  - [📧 Contact](#-contact)
 
 ## 🎮 What is Nashle?
 
@@ -106,7 +108,7 @@ This creates a dynamic where you must outthink not just the word, but the AI's s
 
 ### Prerequisites
 
-- **Node.js** (version 16.0 or higher)
+- **Node.js** (version 20.19.0 or higher — Vite requires Node.js >= 20.19.0 or >= 22.12.0)
 - **npm** (comes with Node.js) or **yarn**
 
 #### Installing Node.js
@@ -124,15 +126,22 @@ This creates a dynamic where you must outthink not just the word, but the AI's s
 **macOS:**
 1. **Option A - Direct Download:**
    - Visit [nodejs.org](https://nodejs.org/)
-   - Download the macOS installer (.pkg file)
+   - Download the installer for Node 20 (or a newer LTS)
    - Run the installer and follow the prompts
 
 2. **Option B - Using Homebrew** (recommended):
    ```bash
-   brew install node
+   brew install node@20
    ```
 
-3. Verify installation:
+3. **Option C - Using nvm (recommended for multiple Node versions):**
+   ```bash
+   # install nvm if you don't have it, then:
+   nvm install 20.19
+   nvm use 20.19
+   ```
+
+4. Verify installation:
    ```bash
    node --version
    npm --version
@@ -229,8 +238,12 @@ npm run preview
 - On Windows, you may need to run as Administrator
 
 **Node.js Version Issues:**
-- Ensure you have Node.js 16.0 or higher
-- Use `nvm` (Node Version Manager) to switch versions if needed
+- Vite requires Node.js **20.19.0 or newer** (or >=22.12.0). If you see an error mentioning Vite's Node requirement, upgrade to Node 20.19+.
+- Use `nvm` (Node Version Manager) to install and switch Node versions if needed:
+   ```bash
+   nvm install 20.19
+   nvm use 20.19
+   ```
 
 ## 🎨 Features
 
@@ -302,6 +315,31 @@ The cyberpunk theme is defined in `src/index.css`:
 - Error color: `#FF0050`
 - Partial (yellow): `#FFD300`
 
+## Docker
+
+You can build a production Docker image and serve the built static site with `nginx`.
+
+Build the image:
+```
+docker build -t nashle:latest .
+```
+
+Run the container:
+```
+docker run --rm -p 80:80 nashle:latest
+```
+
+For local development using `docker-compose`:
+```
+# Run the dev service (maps host port 5173)
+docker-compose up dev
+
+# Build and run the production image via compose
+docker-compose up --build web
+```
+
+Note: the `dev` service defined in `docker-compose.yml` uses a Node 20.19 image so it matches Vite's engine requirement. If you change the `dev` image, ensure it uses Node >= 20.19.
+
 ## 📝 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
@@ -315,6 +353,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
 
 ## 📧 Contact
 
